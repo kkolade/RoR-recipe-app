@@ -12,7 +12,7 @@ class InventoriesController < ApplicationController
 
   # GET /inventories/new
   def new
-    @inventory = Inventory.new
+    @inventory = current_user.inventories.build
   end
 
   # GET /inventories/1/edit
@@ -21,11 +21,11 @@ class InventoriesController < ApplicationController
 
   # POST /inventories or /inventories.json
   def create
-    @inventory = Inventory.new(inventory_params)
+    @inventory = current_user.inventories.build(inventory_params)
 
     respond_to do |format|
       if @inventory.save
-        format.html { redirect_to inventory_url(@inventory), notice: "Inventory was successfully created." }
+        format.html { redirect_to @inventory, notice: "Inventory was successfully created." }
         format.json { render :show, status: :created, location: @inventory }
       else
         format.html { render :new, status: :unprocessable_entity }

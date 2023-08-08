@@ -3,7 +3,7 @@ class RecipesController < ApplicationController
   before_action :set_recipe, only: %i[show edit update destroy toggle_public]
 
   def index
-    @recipes = current_user.recipes.all
+    @recipes = Recipe.includes(:user).where(user_id: current_user.id)
   end
 
   def public_index
@@ -11,7 +11,6 @@ class RecipesController < ApplicationController
   end
 
   def show
-    @recipe = Recipe.find(params[:id])
     @recipe_foods = @recipe.recipe_foods
   end
 
@@ -21,7 +20,6 @@ class RecipesController < ApplicationController
   end
 
   def destroy
-    @recipe = current_user.recipes.find(params[:id])
     @recipe.destroy
     redirect_to recipes_path, notice: 'Recipe was successfully deleted.'
   rescue ActiveRecord::RecordNotFound
@@ -35,6 +33,6 @@ class RecipesController < ApplicationController
   private
 
   def set_recipe
-    @recipe = Recipe.find(params[:id])
+    @recipe = Recipe.includes(:user, :recipe_foods).find(params[:id])
   end
 end

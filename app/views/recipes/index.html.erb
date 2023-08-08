@@ -1,8 +1,8 @@
 <main>
   <div class="recipe-container">
     <ul>
-      <% @recipes.each do |recipe| %>
-        <li class ="recipeCont">
+      <% @recipes.includes(:user).each do |recipe| %>
+        <li class="recipeCont">
           <div class="recipeLeft">
             <%= link_to recipe.name, recipe_path(recipe), class: 'recipeTitle' %>
             <% if recipe.user == current_user %>
@@ -10,7 +10,7 @@
             <% end %>
           </div>
           <div class="recipeRight">
-            <p class= "recipeDesc"><strong>Description:</strong> <%= recipe.description %></p>
+            <p class="recipeDesc"><strong>Description:</strong> <%= recipe.description %></p>
           </div>
         </li>
       <% end %>

@@ -78,3 +78,21 @@ a {
   align-items: center;
   justify-content: end;
 }
+
+.recipeInfo {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+#modal {
+  position: absolute;
+  z-index: 2;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 50vw;
+  word-break: break-word;
+  border-radius: 6px;
+  background: lightgray;
+}

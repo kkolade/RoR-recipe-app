@@ -12,16 +12,12 @@ class RecipesController < ApplicationController
 
   def show
     @recipe = Recipe.find(params[:id])
-  end
-
-  def show
-    @recipe = current_user.recipes.find(params[:id])
     @recipe_foods = @recipe.recipe_foods
   end
 
   def toggle_public
-    @recipe.update(public: !@recipe.public)
-    redirect_to @recipe, notice: 'Recipe public status toggled.'
+    @recipe.update(is_public: !@recipe.is_public)
+    redirect_to @recipe, notice: 'Recipe public status changed.'
   end
 
   def destroy

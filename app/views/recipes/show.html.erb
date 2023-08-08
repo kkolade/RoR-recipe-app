@@ -7,7 +7,7 @@
         <p><strong>Cooking Time:</strong> <%= @recipe.cooking_time %> minutes</p>
       </div>
       <div class="recipeInfoR">
-        <p><strong>Public:</strong> <%= @recipe.public ? 'Yes' : 'No' %></p>
+        <p><strong>Public:</strong> <%= @recipe.is_public ? 'Yes' : 'No' %></p>
         <div class="toggle-button">
           <% if current_user == @recipe.user %>
             <%= button_to "Toggle Public", toggle_public_recipe_path(@recipe), method: :patch, class: "btn toggle-public-btn" %>
@@ -23,9 +23,9 @@
     </div>
   <% end %>
 
-  <% if @recipe.public || current_user == @recipe.user %>
+  <% if @recipe.is_public || current_user == @recipe.user %>
     <div class="generate-list-button">
-    <%= link_to "Generate shopping list", modal_recipe_path, data: { turbo_frame: 'modal' } %>
+      <%= link_to "Generate shopping list", modal_recipe_path, data: { turbo_frame: 'modal' } %>
     </div>
   <% end %>
 </main>

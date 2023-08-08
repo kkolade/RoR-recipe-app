@@ -47,11 +47,13 @@ class InventoriesController < ApplicationController
 
   # DELETE /inventories/1 or /inventories/1.json
   def destroy
-    @inventory.destroy
+    @inventory = Inventory.find(params[:id])
 
-    respond_to do |format|
-      format.html { redirect_to inventories_url, notice: 'Inventory was successfully destroyed.' }
-      format.json { head :no_content }
+    if @inventory.user == current_user
+      @inventory.destroy
+      redirect_to inventories_url, notice: 'Inventory was successfully destroyed.'
+    else
+      redirect_to @inventory, alert: 'You are not authorized to delete this inventory.'
     end
   end
 

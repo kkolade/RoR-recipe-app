@@ -11,4 +11,5 @@ Rails.application.routes.draw do
     resources :foods, only: [:new, :create]
     post :create_shopping_list, to: 'shopping_lists#create'
   end
+
 end

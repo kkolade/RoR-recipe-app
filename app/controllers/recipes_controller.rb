@@ -7,7 +7,11 @@ class RecipesController < ApplicationController
   end
 
   def public_index
-    @recipes = Recipe.all
+    @recipes = Recipe.includes(:user).where(is_public: true)
+  end
+
+  def show
+    @recipe = Recipe.find(params[:id])
   end
 
   def show

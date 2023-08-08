@@ -1,6 +1,7 @@
 <p style="color: green"><%= notice %></p>
 
-<%= render @inventory %>
+<%= render partial: 'shared/inventory', locals: { inventory: @inventory } %>
+
 
 <div>
   <%= link_to "Back to inventories", inventories_path %>

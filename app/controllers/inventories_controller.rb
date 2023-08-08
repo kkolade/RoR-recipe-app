@@ -7,7 +7,9 @@ class InventoriesController < ApplicationController
   end
 
   # GET /inventories/1
-  def show; end
+  def show 
+    set_inventory
+  end
 
   # GET /inventories/new
   def new

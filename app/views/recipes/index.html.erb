@@ -1,2 +1,19 @@
-<h1>Recipes#index</h1>
-<p>Find me in app/views/recipes/index.html.erb</p>
+<main>
+  <div class="recipe-container">
+    <ul>
+      <% @recipes.each do |recipe| %>
+        <li class ="recipeCont">
+          <div class="recipeLeft">
+            <%= link_to recipe.name, recipe_path(recipe), class: 'recipeTitle' %>
+            <% if recipe.user == current_user %>
+            <%= link_to 'remove', recipe_path(recipe), data: { turbo_method: :delete, confirm: 'Are you sure you want to remove this recipe?' }, class: 'removeBtn' %>
+            <% end %>
+          </div>
+          <div class="recipeRight">
+            <p class= "recipeDesc"><strong>Description:</strong> <%= recipe.description %></p>
+          </div>
+        </li>
+      <% end %>
+    </ul>
+  </div>
+</main>

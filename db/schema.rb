@@ -10,14 +10,14 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_08_07_215124) do
+ActiveRecord::Schema[7.0].define(version: 2023_08_08_151655) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "recipes", force: :cascade do |t|
     t.string "name"
     t.text "description"
-    t.boolean "public"
+    t.boolean "is_public", default: false
     t.bigint "user_id", null: false
     t.integer "preparation_time"
     t.integer "cooking_time"

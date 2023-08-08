@@ -24,11 +24,11 @@ ActiveRecord::Schema[7.0].define(version: 2023_08_08_163655) do
 
   create_table "recipes", force: :cascade do |t|
     t.string "name"
-    t.time "preparation_time"
-    t.time "cooking_time"
     t.text "description"
     t.boolean "public"
     t.bigint "user_id", null: false
+    t.integer "preparation_time"
+    t.integer "cooking_time"
     t.index ["user_id"], name: "index_recipes_on_user_id"
   end
 

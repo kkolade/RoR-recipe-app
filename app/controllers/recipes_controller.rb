@@ -4,7 +4,7 @@ class RecipesController < ApplicationController
   end
 
   def public_index
-    @recipes = Recipe.includes(:user).where(public: true)
+    @recipes = Recipe.includes(:user).where(is_public: true)
   end
 
   def show

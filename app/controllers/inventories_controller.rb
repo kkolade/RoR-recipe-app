@@ -7,7 +7,7 @@ class InventoriesController < ApplicationController
   end
 
   # GET /inventories/1
-  def show 
+  def show
     set_inventory
   end
 
@@ -21,9 +21,9 @@ class InventoriesController < ApplicationController
     @inventory = current_user.inventories.build(inventory_params)
 
     if @inventory.save
-      redirect_to @inventory, notice: 'Inventory was successfully created.' 
+      redirect_to @inventory, notice: 'Inventory was successfully created.'
     else
-      render :new, status: :unprocessable_entity 
+      render :new, status: :unprocessable_entity
     end
   end
 

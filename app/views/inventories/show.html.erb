@@ -6,5 +6,7 @@
 <div>
   <%= link_to "Back to inventories", inventories_path %>
 
-  <%= button_to "Destroy this inventory", @inventory, method: :delete %>
+  <% if current_user.id == @inventory.user_id %>
+    <%= button_to "Destroy this inventory", @inventory, method: :delete %>
+  <% end %>
 </div>

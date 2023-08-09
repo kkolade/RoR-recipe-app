@@ -27,8 +27,32 @@
     <% end %>
     <% if @recipe.is_public || current_user == @recipe.user %>
       <div class="generate-list-button">
-        <%= link_to "Generate shopping list", modal_recipe_path, data: { turbo_frame: 'modal' } %>
+        <%= link_to "Generate shopping list", modal_recipe_path(@recipe), class: "btn btn-primary", data: { turbo_frame: 'modal' } %>
       </div>
     <% end %>
   </div>
+
+  <table class="tableRecipe">
+    <thead>
+      <tr>
+        <th>Food</th>
+        <th>Quantity</th>
+        <th>Price</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @recipe_foods.each do |recipe_food| %>
+        <tr>
+          <td><%= recipe_food.food.name %></td>
+          <td><%= "#{recipe_food.quantity} #{recipe_food.food.measurement_unit}" %></td>
+          <td><%= (recipe_food.quantity * recipe_food.food.price).to_i %> $</td>
+          <td class="buttonsTable">
+            <%= link_to 'Edit', edit_recipe_recipe_food_path(@recipe, recipe_food), class: 'btn btn-primary' %>
+            <%= button_to 'Delete', recipe_recipe_food_path(@recipe, recipe_food), method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger' %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
 </main>

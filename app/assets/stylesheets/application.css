@@ -194,6 +194,7 @@ a {
   flex-direction: row;
   justify-content: space-between;
   padding: 0 25%;
+  padding-bottom: 45px;
 }
 
 .buttonsRecipe a {
@@ -209,6 +210,22 @@ a {
   border: 1.5px solid #fff;
   border-radius: 6px;
   color: #fff;
+}
+
+.tableRecipe {
+  margin-left: 12%;
+}
+
+.tableRecipe tr,
+.tableRecipe td {
+  text-align: center;
+}
+
+.buttonsTable {
+  display: flex;
+  gap: 5px;
+  justify-content: center;
+  padding-top: 15px;
 }
 
 .formAddR {

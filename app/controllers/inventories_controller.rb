@@ -22,7 +22,7 @@ class InventoriesController < ApplicationController
     @inventory = current_user.inventories.build(inventory_params)
 
     if @inventory.save
-      redirect_to @inventory, notice: 'Inventory was successfully created.'
+      redirect_to inventories_url, notice: 'Inventory was successfully created.'
     else
       render :new, status: :unprocessable_entity
     end

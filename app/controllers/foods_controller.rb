@@ -1,11 +1,11 @@
 class FoodsController < ApplicationController
   def new
-    @recipe = Recipe.find(params[:recipe_id])
+    @recipe = Recipe.includes(:recipe_foods).find(params[:recipe_id])
     @food = Food.new
   end
 
   def create
-    @recipe = Recipe.find(params[:recipe_id])
+    @recipe = Recipe.includes(:recipe_foods).find(params[:recipe_id])
     @food = @recipe.foods.build(food_params)
 
     if @food.save

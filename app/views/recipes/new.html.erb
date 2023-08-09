@@ -1,0 +1,31 @@
+<div class="recipe-container">
+  <h1>Create a New Recipe</h1>
+
+  <div class="formAddR">
+    <%= form_with(model: @recipe, url: recipes_path, class: 'recipe-form') do |form| %>
+      <div class="addField">
+        <%= form.label :name %>
+        <%= form.text_field :name %>
+      </div>
+      <div class="addField">
+        <%= form.label :description %>
+        <%= form.text_area :description %>
+      </div>
+      <div class="addField">
+        <%= form.label :preparation_time %>
+        <%= form.number_field :preparation_time %>
+      </div>
+      <div class="addField">
+        <%= form.label :cooking_time %>
+        <%= form.number_field :cooking_time %>
+      </div>
+      <div class="addFieldCheck">
+        <%= form.label :is_public? %>
+        <%= form.check_box :is_public %>
+      </div>
+      <%= form.hidden_field :user_id, value: current_user.id %>
+      
+      <%= form.submit "Create Recipe", class: "submitBtn" %>
+    <% end %>
+  </div>
+</div>

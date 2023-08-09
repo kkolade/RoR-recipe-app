@@ -71,6 +71,12 @@ a {
   padding-bottom: 15px;
 }
 
+.addRecipeBtn {
+  display: flex;
+  align-self: center;
+  justify-content: flex-end;
+}
+
 .recipeCont {
   display: flex;
   flex-direction: row;
@@ -153,6 +159,15 @@ a {
   gap: 15px;
 }
 
+.recipeInfoL p {
+  margin-bottom: 0;
+  font-size: 1.1rem;
+}
+
+.descRecipeD {
+  padding-left: 2px;
+}
+
 .recipeInfoR {
   display: flex;
   gap: 15%;
@@ -204,34 +219,30 @@ a {
   display: flex;
   flex-direction: column;
   width: 100%;
-  gap: 20%;
 }
 
 .addField {
   display: flex;
   flex-direction: column;
-  padding: 2%;
 }
 
 .addFieldCheck {
   display: flex;
   flex-direction: row;
-  padding: 2%;
   gap: 2%;
 }
 
 .addField label,
 .addFieldCheck label {
   font-weight: bold;
-  padding: 2% 0;
+  padding: 12px 0;
 }
 
 .submitBtn {
   display: flex;
-  width: 40%;
   align-self: center;
-  text-align: center;
-  padding-left: 9%;
+  padding: 1px 5px;
+  text-align: right;
   background-color: #fff;
   border: 1.5px solid green;
   border-radius: 6px;

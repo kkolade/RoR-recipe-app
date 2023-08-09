@@ -1,7 +1,7 @@
 <%= turbo_frame_tag "modal" do %>
-  <%= tag.div data: { controller: "turbo-modal" }, style: "padding: 1rem; border: 1px solid black" do %>
+  <%= tag.div data: { controller: "turbo-modal", referring_url: request.referrer }, style: "padding: 1rem; border: 1px solid black" do %>
     <h2>Modal</h2>
     <p>Here goes the data of your modal</p>
-    <%= button_tag "Close", data: { action: "turbo-modal#hideModal" }, type: "button" %>
+    <%= button_tag "Close", data: { action: "turbo-modal#hideModal" }, type: "button", class: "close-modal-button" %>
   <% end %>
 <% end %>

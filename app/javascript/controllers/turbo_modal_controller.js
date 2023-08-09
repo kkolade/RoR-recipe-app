@@ -1,9 +1,13 @@
 import { Controller } from "@hotwired/stimulus"
 
-// Connects to data-controller="turbo-modal"
 export default class extends Controller {
   hideModal() {
-    this.element.parentElement.removeAttribute("src")
-    this.element.remove()
+    const referringUrl = this.element.closest("[data-controller='turbo-modal']").getAttribute("data-referring-url");
+    this.element.parentElement.removeAttribute("src");
+    this.element.remove();
+    
+    if (referringUrl) {
+      window.location.href = referringUrl;
+    }
   }
 }

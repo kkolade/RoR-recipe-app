@@ -7,25 +7,27 @@
         <p><strong>Cooking Time:</strong> <%= @recipe.cooking_time %> minutes</p>
       </div>
       <div class="recipeInfoR">
-        <p><strong>Public:</strong> <%= @recipe.is_public ? 'Yes' : 'No' %></p>
+        <p><strong>Public:</strong></p>
         <div class="toggle-button">
           <% if current_user == @recipe.user %>
-            <%= button_to "Toggle Public", toggle_public_recipe_path(@recipe), method: :patch, class: "btn toggle-public-btn" %>
+            <%= button_to toggle_public_recipe_path(@recipe), method: :patch, class: "btnToggle" do %>
+              <%= @recipe.is_public ? 'Yes' : 'No' %>
+            <% end %>
           <% end %>
         </div>
       </div>
     </div>
   </div>
-
-  <% if current_user == @recipe.user %>
-    <div class="add-food-form">
-      <%= link_to "Add New Food", new_recipe_food_path(@recipe), class: "btn btn-primary" %>
-    </div>
-  <% end %>
-
-  <% if @recipe.is_public || current_user == @recipe.user %>
-    <div class="generate-list-button">
-      <%= link_to "Generate shopping list", modal_recipe_path, data: { turbo_frame: 'modal' } %>
-    </div>
-  <% end %>
+  <div class="buttonsRecipe">
+    <% if current_user == @recipe.user %>
+      <div class="add-food-form">
+        <%= link_to "Add New Food", new_recipe_food_path(@recipe), class: "btn btn-primary" %>
+      </div>
+    <% end %>
+    <% if @recipe.is_public || current_user == @recipe.user %>
+      <div class="generate-list-button">
+        <%= link_to "Generate shopping list", modal_recipe_path, data: { turbo_frame: 'modal' } %>
+      </div>
+    <% end %>
+  </div>
 </main>

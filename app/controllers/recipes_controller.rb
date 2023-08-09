@@ -30,9 +30,27 @@ class RecipesController < ApplicationController
 
   def modal; end
 
+  def create
+    @recipe = current_user.recipes.build(recipe_params)
+
+    if @recipe.save
+      redirect_to @recipe, notice: 'Recipe was successfully created.'
+    else
+      render :new
+    end
+  end
+
+  def new
+    @recipe = Recipe.new
+  end
+
   private
 
   def set_recipe
     @recipe = Recipe.includes(:user, :recipe_foods).find(params[:id])
+  end
+
+  def recipe_params
+    params.require(:recipe).permit(:name, :description, :is_public, :preparation_time, :cooking_time)
   end
 end

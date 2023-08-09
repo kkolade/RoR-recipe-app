@@ -1,7 +1,7 @@
 <div class="recipe-container">
   <h1>Create a New Food Item</h1>
 
-  <%= form_with(model: @food, url: recipe_foods_path(@recipe), local: true) do |form| %>
+  <%= form_with model: @food, url: foods_path do |form| %>
     <div class="field">
       <%= form.label :name %>
       <%= form.text_field :name %>

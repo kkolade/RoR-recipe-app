@@ -153,6 +153,15 @@ a {
   gap: 15px;
 }
 
+.recipeInfoL p {
+  margin-bottom: 0;
+  font-size: 1.1rem;
+}
+
+.descRecipeD {
+  padding-left: 2px;
+}
+
 .recipeInfoR {
   display: flex;
   gap: 15%;

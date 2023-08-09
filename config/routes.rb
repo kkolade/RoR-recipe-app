@@ -1,8 +1,8 @@
 Rails.application.routes.draw do
   devise_for :users, path: '', path_names: { sign_in: 'login' }
   root "recipes#public_index"
-  resources :inventories, except: [:edit, :update]  
-  resources :recipes, only: [:index, :show, :destroy, :update] do
+  resources :inventories, except: [:edit, :update]    
+  resources :recipes, only: [:index, :show, :destroy, :update, :new, :create] do
     member do
       patch :toggle_public
       get 'modal'

@@ -1,0 +1,9 @@
+<p style="color: green"><%= notice %></p>
+
+<%= render partial: 'shared/inventory', locals: { inventory: @inventory } %>
+
+<div class="d-flex justify-content-end">
+  <%= link_to inventories_path, class: "btn btn-primary" do %>
+    &larr; Back to inventories
+  <% end %>
+</div>

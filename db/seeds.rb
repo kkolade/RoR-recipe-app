@@ -19,3 +19,10 @@ testing_user.save!
 
 recipe_three = Recipe.new(id: 1000 ,user: testing_user, name: 'Apple pie', description: 'A pie made with apples')
 recipe_three.save!
+
+food_apple          = Food.new(id: 1, name: 'Apple', measurement_unit: 'grams', price: 5)
+food_pineapple      = Food.new(id: 2, name: 'Pineapple', measurement_unit: 'grams', price: 10)
+food_chicken_breast = Food.new(id: 3, name: 'Chicken breast', measurement_unit: 'units', price: 20)
+food_apple.save!
+food_pineapple.save!
+food_chicken_breast.save!

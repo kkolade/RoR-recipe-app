@@ -1,7 +1,28 @@
-<p style="color: green"><%= notice %></p>
+<%= notice %>
 
 <%= link_to "Add New Food", new_inventory_food_path(@inventory), class: "btn btn-primary" %>
 <%= render partial: 'shared/inventory', locals: { inventory: @inventory } %>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Quantity</th>
+      <th>Action</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @inventory.inventory_foods.each do |inventory_food| %>
+      <tr>
+        <td><%= inventory_food.food.name %></td>
+        <td><%= inventory_food.quantity %></td>
+        <td>
+          <%= link_to "Delete", inventory_food, data: { turbo_method: :delete, confirm: "Are you sure?" } %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
 
 <div class="d-flex justify-content-end">
   <%= link_to inventories_path, class: "btn btn-primary" do %>

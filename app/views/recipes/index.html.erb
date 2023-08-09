@@ -1,5 +1,12 @@
-<main>
+<div>
   <div class="recipe-container">
+    <div class="recipeHeader">
+      <h1> My Recipes </h1>
+      <div class="addRecipeBtn">
+      <%= link_to "New Recipe", new_recipe_path, class: "btn btn-primary" %>
+      </div>
+    </div>
+    <hr>
     <ul>
       <% @recipes.includes(:user).each do |recipe| %>
         <li class="recipeCont">
@@ -16,4 +23,4 @@
       <% end %>
     </ul>
   </div>
-</main>
+</div>

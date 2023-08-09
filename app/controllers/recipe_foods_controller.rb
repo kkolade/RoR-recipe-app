@@ -1,6 +1,10 @@
 class RecipeFoodsController < ApplicationController
   before_action :set_recipe
 
+  def new
+    @recipe_food = RecipeFood.new
+  end
+
   def create
     @recipe_food = @recipe.recipe_foods.build(recipe_food_params)
 

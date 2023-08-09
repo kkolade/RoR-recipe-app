@@ -3,7 +3,7 @@ class InventoriesController < ApplicationController
 
   # GET /inventories
   def index
-    @inventories = Inventory.all
+    @inventories = Inventory.includes(:user).all
   end
 
   # GET /inventories/1
@@ -42,7 +42,7 @@ class InventoriesController < ApplicationController
   private
 
   def set_inventory
-    @inventory = Inventory.find(params[:id])
+    @inventory = Inventory.includes(:user).find(params[:id])
   end
 
   # Only allow a list of trusted parameters through.

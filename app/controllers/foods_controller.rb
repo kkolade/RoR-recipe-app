@@ -2,7 +2,7 @@ class FoodsController < ApplicationController
   def index
     @foods = Food.all
   end
-  
+
   def new
     @food = Food.new
   end
@@ -20,7 +20,7 @@ class FoodsController < ApplicationController
   def destroy
     @food = Food.find(params[:id])
     @food.destroy
-    redirect_to foods_path, notice: 'Food was successfully deleted.'    
+    redirect_to foods_path, notice: 'Food was successfully deleted.'
   end
 
   private

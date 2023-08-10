@@ -1,8 +1,7 @@
-# spec/views/inventories/index.html.erb_spec.rb
 require 'rails_helper'
 
 RSpec.describe "inventories/index", type: :view do
-  let(:user) { create(:user) } # Assuming you have a User factory
+  let(:user) { create(:user) }
   let(:inventory1) { create(:inventory, user: user) }
   let(:inventory2) { create(:inventory, user: create(:user)) }
 

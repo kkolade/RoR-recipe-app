@@ -1,0 +1,13 @@
+<div>
+  <%= link_to inventories_path, class: "btn btn-primary" do %>
+    &larr; Back to inventories
+  <% end %>
+</div>
+
+<h1>New inventory</h1>
+
+<%= render partial: 'shared/form', locals: { inventory: @inventory } %>
+
+
+
+

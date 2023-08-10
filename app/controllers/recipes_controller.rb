@@ -27,7 +27,10 @@ class RecipesController < ApplicationController
     redirect_to recipes_path, alert: "Error: #{e.message}"
   end
 
-  def modal; end
+  def modal
+    @recipe = Recipe.find(params[:id])
+    render layout: false
+  end
 
   def create
     @recipe = current_user.recipes.build(recipe_params)

@@ -13,7 +13,11 @@ Rails.application.routes.draw do
     
     resources :foods, only: [:new, :create], controller: 'recipe_foods'
     post :create_shopping_list, to: 'shopping_lists#create'
+
+    resources :recipe_foods, only: [:new, :create, :edit, :update, :destroy]
+    post :create_shopping_list, to: 'shopping_lists#create'
   end
 
   resources :foods, only: [:index, :destroy, :new, :create]
+  resources :shopping_lists, only: [:index]
 end

@@ -1,0 +1,16 @@
+<h1>Edit Food</h1>
+
+<%= form_with(model: [@recipe, @recipe_food], url: recipe_recipe_food_path(@recipe, @recipe_food), method: :patch) do |form| %>
+  <div class="field">
+    <%= form.label :quantity %>
+    <%= form.text_field :quantity %>
+  </div>
+  
+  <!-- Other form fields -->
+
+  <div class="actions">
+    <%= form.submit 'Update Recipe Food', class: 'btn btn-primary' %>
+  </div>
+<% end %>
+
+<%= link_to 'Back', recipe_path(@recipe), class: 'btn btn-secondary' %>

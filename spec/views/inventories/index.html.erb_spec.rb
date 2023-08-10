@@ -1,23 +1,29 @@
+# spec/views/inventories/index.html.erb_spec.rb
 require 'rails_helper'
 
-RSpec.describe 'inventories/index', type: :view do
-  before(:each) do
-    assign(:inventories, [
-             Inventory.create!(
-               name: 'Name',
-               user: nil
-             ),
-             Inventory.create!(
-               name: 'Name',
-               user: nil
-             )
-           ])
+RSpec.describe "inventories/index", type: :view do
+  let(:user) { create(:user) } # Assuming you have a User factory
+  let(:inventory1) { create(:inventory, user: user) }
+  let(:inventory2) { create(:inventory, user: create(:user)) }
+
+  before do
+    assign(:inventories, [inventory1, inventory2])
+    allow(view).to receive(:current_user).and_return(user)
+    render
   end
 
-  it 'renders a list of inventories' do
-    render
-    cell_selector = Rails::VERSION::STRING >= '7' ? 'div>p' : 'tr>td'
-    assert_select cell_selector, text: Regexp.new('Name'.to_s), count: 2
-    assert_select cell_selector, text: Regexp.new(nil.to_s), count: 2
+  it "displays inventories" do
+    expect(rendered).to have_content(inventory1.name)
+    expect(rendered).to have_selector(".inventory-card", count: 2)
+    expect(rendered).to have_link("Remove", href: inventory_path(inventory1))
+    expect(rendered).to have_link("New inventory", href: new_inventory_path)
+  end
+
+  it "renders Remove button correctly for owned inventory" do
+    expect(rendered).to have_button("Remove", count: 1, disabled: false)
+  end
+
+  it "renders Remove button correctly for non-owned inventory" do
+    expect(rendered).to have_button("Remove", count: 1, disabled: true)
   end
 end

@@ -1,5 +1,5 @@
 <div class="recipe-container">
-  <h1>NEW FORM</h1> <%# Replace with your form %> 
+  <h1>Add a Food for your recipe!</h1>
 
   <%= form_with(model: [@recipe, @recipe_food], url: recipe_foods_path(@recipe)) do |form| %>
     <div class="field">
@@ -13,7 +13,7 @@
     </div>
 
     <div class="actions">
-      <%= form.submit %>
+      <%= form.submit 'Add Food', class: 'btn submitBtn' %>
     </div>
   <% end %>
 </div>

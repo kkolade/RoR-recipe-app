@@ -42,6 +42,10 @@ h1 {
 
 .public-recipe-box {
   border: 1px solid black;
+}
+
+.public-recipe-box,
+.shopping-list-details {
   display: grid;
   padding: 1rem;
   grid-template-columns: 1fr 1fr;
@@ -69,6 +73,12 @@ a {
   flex-direction: column;
   padding: 5% 14%;
   padding-bottom: 15px;
+}
+
+.addRecipeBtn {
+  display: flex;
+  align-self: center;
+  justify-content: flex-end;
 }
 
 .recipeCont {
@@ -141,16 +151,25 @@ a {
   left: 50%;
   top: 50%;
   transform: translate(-50%, -50%);
-  width: 50vw;
+  width: 60vw;
   word-break: break-word;
-  border-radius: 6px;
-  background: lightgray;
+  border-radius: 20px;
+  background: #f0f0f0;
 }
 
 .recipeInfoL {
   display: flex;
   flex-direction: column;
   gap: 15px;
+}
+
+.recipeInfoL p {
+  margin-bottom: 0;
+  font-size: 1.1rem;
+}
+
+.descRecipeD {
+  padding-left: 2px;
 }
 
 .recipeInfoR {
@@ -179,6 +198,7 @@ a {
   flex-direction: row;
   justify-content: space-between;
   padding: 0 25%;
+  padding-bottom: 45px;
 }
 
 .buttonsRecipe a {
@@ -196,6 +216,22 @@ a {
   color: #fff;
 }
 
+.tableRecipe {
+  margin-left: 3%;
+}
+
+.tableRecipe tr,
+.tableRecipe td {
+  text-align: center;
+}
+
+.buttonsTable {
+  display: flex;
+  gap: 5px;
+  justify-content: center;
+  padding-top: 15px;
+}
+
 .formAddR {
   display: flex;
 }
@@ -204,36 +240,37 @@ a {
   display: flex;
   flex-direction: column;
   width: 100%;
-  gap: 20%;
 }
 
 .addField {
   display: flex;
   flex-direction: column;
-  padding: 2%;
 }
 
 .addFieldCheck {
   display: flex;
   flex-direction: row;
-  padding: 2%;
   gap: 2%;
 }
 
 .addField label,
 .addFieldCheck label {
   font-weight: bold;
-  padding: 2% 0;
+  padding: 12px 0;
 }
 
 .submitBtn {
   display: flex;
-  width: 40%;
   align-self: center;
-  text-align: center;
-  padding-left: 9%;
+  padding: 1px 5px;
+  text-align: right;
   background-color: #fff;
   border: 1.5px solid green;
   border-radius: 6px;
   color: green;
+}
+
+.link {
+  color: blue;
+  text-decoration: underline;
 }

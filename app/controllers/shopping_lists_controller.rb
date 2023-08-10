@@ -18,6 +18,8 @@ class ShoppingListsController < ApplicationController
     recipe_foods.each do |recipe_food|
       inventory_food = inventory_foods.find_by(food: recipe_food.food)
 
+      next if recipe_food.food.nil? || inventory_food.nil?
+
       recipe_food_price_difference = recipe_food.food.price * recipe_food.quantity
       inventory_food_price_difference = inventory_food.food.price * inventory_food.quantity
       price_difference = recipe_food_price_difference - inventory_food_price_difference

@@ -1,7 +1,27 @@
 <%= turbo_frame_tag "modal" do %>
-  <%= tag.div data: { controller: "turbo-modal", referring_url: request.referrer }, style: "padding: 1rem; border: 1px solid black" do %>
-    <h2>Modal</h2>
-    <p>Here goes the data of your modal</p>
-    <%= button_tag "Close", data: { action: "turbo-modal#hideModal" }, type: "button", class: "close-modal-button" %>
-  <% end %>
+  <div data-controller="modal">
+    <div class="shopping_modal_cont">
+      <div class="shopping_modal" style="padding: 1rem;">
+        <h1 class="form-title">Generating Shopping List</h1>
+        
+        <%= form_with(url: recipe_create_shopping_list_path(@recipe), method: :post, class: 'forms') do |form| %>
+          <%= form.hidden_field :recipe_id, value: @recipe.id %>
+          
+          <div class="field">
+            <%= form.label :inventory_id, 'Choose an inventory to use:', class: 'shopping-sub' %>
+            <%= form.collection_select(:inventory_id, Inventory.all, :id, :name, { prompt: true }, { required: true }) %>
+          </div>
+          
+          <div class="form-actions">
+            <%= button_tag 'Generate and Close', type: 'submit', class: 'btn submit-and-close-button' %>
+          </div>
+        <% end %>
+        
+        <div class="form-actions">
+          <%= button_tag 'Close', type: 'button', class: 'btn close-modal-button', data: { action: 'modal#hideModal' } %>
+        </div>
+      </div>
+      </div>
+    </div>
+  </div>
 <% end %>

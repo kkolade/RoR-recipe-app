@@ -15,10 +15,21 @@ class InventoryFoodsController < ApplicationController
     end
   end
 
+  def destroy
+    @inventory = Inventory.find(params[:inventory_id])
+    @inventory_food = @inventory.inventory_foods.find(params[:id])
+    @inventory_food.destroy
+    redirect_to @inventory, notice: 'Inventory food was successfully deleted.'
+  end
+
   private
 
   def set_inventory
     @inventory = Inventory.find(params[:inventory_id])
+  end
+
+  def set_inventory_food
+    @inventory_food = InventoryFood.find(params[:id])
   end
 
   def inventory_food_params

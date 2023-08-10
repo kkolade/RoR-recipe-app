@@ -7,6 +7,7 @@ class RecipesController < ApplicationController
 
   def public_index
     @recipes = Recipe.includes(:user).where(is_public: true)
+    @recipe_totals = calculate_recipe_totals(@recipes)
   end
 
   def show
@@ -53,5 +54,24 @@ class RecipesController < ApplicationController
 
   def recipe_params
     params.require(:recipe).permit(:name, :description, :is_public, :preparation_time, :cooking_time)
+  end
+
+  def calculate_recipe_totals(recipes)
+    recipe_totals = []
+  
+    recipes.each do |recipe|
+      total_foods = 0
+      total_price = 0
+  
+      recipe.recipe_foods.includes(:food).each do |recipe_food|
+        food = recipe_food.food
+        total_foods += 1
+        total_price += (recipe_food.quantity * food.price)
+      end
+  
+      recipe_totals << { recipe: recipe, total_foods: total_foods, total_price: total_price }
+    end
+  
+    recipe_totals
   end
 end

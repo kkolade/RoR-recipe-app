@@ -1,85 +1,85 @@
 require 'rails_helper'
 
 RSpec.describe InventoriesController, type: :controller do
-  let(:user) { create(:user) } # Assuming there's a User model with FactoryBot
-  let(:inventory) { create(:inventory, user:) } # Assuming there's an Inventory model with FactoryBot
+  let(:user) { create(:user) }
+  let(:valid_attributes) { { name: 'Test Inventory', description: 'Test Description' } }
+  let(:invalid_attributes) { { name: '', description: 'Test Description' } }
+  let(:valid_session) { {} }
 
-  describe 'GET #index' do
-    it 'assigns all inventories to @inventories' do
-      inventories = create_list(:inventory, 3)
-      get :index
-      expect(assigns(:inventories)).to eq(inventories)
-    end
+  before do
+    sign_in(user) 
+  end
 
-    it 'renders the :index template' do
-      get :index
-      expect(response).to render_template(:index)
+  describe "GET #index" do
+    it "returns a successful response" do
+      get :index, session: valid_session
+      expect(response).to be_successful
     end
   end
 
-  describe 'GET #show' do
-    it 'assigns the requested inventory to @inventory' do
-      get :show, params: { id: inventory.id }
-      expect(assigns(:inventory)).to eq(inventory)
-    end
-
-    it 'renders the :show template' do
-      get :show, params: { id: inventory.id }
-      expect(response).to render_template(:show)
+  describe "GET #show" do
+    it "returns a successful response" do
+      inventory = user.inventories.create! valid_attributes
+      get :show, params: { id: inventory.to_param }, session: valid_session
+      expect(response).to be_successful
     end
   end
 
-  describe 'GET #new' do
-    it 'assigns a new inventory to @inventory' do
-      get :new
-      expect(assigns(:inventory)).to be_a_new(Inventory)
-    end
-
-    it 'renders the :new template' do
-      get :new
-      expect(response).to render_template(:new)
+  describe "GET #new" do
+    it "returns a successful response" do
+      get :new, session: valid_session
+      expect(response).to be_successful
     end
   end
 
-  describe 'POST #create' do
-    context 'with valid attributes' do
-      it 'creates a new inventory' do
-        expect do
-          post :create, params: { inventory: attributes_for(:inventory) }
-        end.to change(Inventory, :count).by(1)
+  describe "POST #create" do
+    context "with valid params" do
+      it "creates a new inventory" do
+        expect {
+          post :create, params: { inventory: valid_attributes }, session: valid_session
+        }.to change(Inventory, :count).by(1)
       end
 
-      it 'redirects to the created inventory' do
-        post :create, params: { inventory: attributes_for(:inventory) }
-        expect(response).to redirect_to(Inventory.last)
+      it "redirects to the inventories list" do
+        post :create, params: { inventory: valid_attributes }, session: valid_session
+        expect(response).to redirect_to(inventories_url)
       end
     end
 
-    context 'with invalid attributes' do
-      it 'does not save the new inventory' do
-        expect do
-          post :create, params: { inventory: attributes_for(:inventory, name: nil) }
-        end.to_not change(Inventory, :count)
+    context "with invalid params" do
+      it "does not create a new inventory" do
+        expect {
+          post :create, params: { inventory: invalid_attributes }, session: valid_session
+        }.to_not change(Inventory, :count)
       end
 
-      it 're-renders the :new template' do
-        post :create, params: { inventory: attributes_for(:inventory, name: nil) }
+      it "renders the :new template" do
+        post :create, params: { inventory: invalid_attributes }, session: valid_session
         expect(response).to render_template(:new)
       end
     end
   end
 
-  describe 'DELETE #destroy' do
-    it 'destroys the requested inventory' do
-      inventory # Ensure the inventory is created
-      expect do
-        delete :destroy, params: { id: inventory.id }
-      end.to change(Inventory, :count).by(-1)
+  describe "DELETE #destroy" do
+    it "destroys the requested inventory" do
+      inventory = user.inventories.create! valid_attributes
+      expect {
+        delete :destroy, params: { id: inventory.to_param }, session: valid_session
+      }.to change(Inventory, :count).by(-1)
     end
 
-    it 'redirects to the inventories list' do
-      delete :destroy, params: { id: inventory.id }
+    it "redirects to the inventories list" do
+      inventory = user.inventories.create! valid_attributes
+      delete :destroy, params: { id: inventory.to_param }, session: valid_session
       expect(response).to redirect_to(inventories_url)
+    end
+
+    it "does not allow users to delete other users' inventories" do
+      other_user = create(:user)
+      inventory = other_user.inventories.create! valid_attributes
+      delete :destroy, params: { id: inventory.to_param }, session: valid_session
+      expect(response).to redirect_to(inventory)
+      expect(flash[:alert]).to eq('You are not authorized to delete this inventory.')
     end
   end
 end

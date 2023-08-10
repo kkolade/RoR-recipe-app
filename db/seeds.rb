@@ -29,7 +29,7 @@ food_bread.save!
 food_pineapple.save!
 food_chicken_breast.save!
 
-inventory_one = Inventory.new(user: user_example, name: 'Fridge')
+inventory_one = Inventory.new(user: user_example, name: 'Fridge', description: 'A nice cold storage for storing food')
 inventory_one.save!
 
 recipe_foods_one = RecipeFood.new(recipe: recipe_one, food: food_apple, quantity: 5)

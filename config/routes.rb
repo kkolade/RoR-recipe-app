@@ -3,6 +3,7 @@ Rails.application.routes.draw do
   root "recipes#public_index"
   resources :inventories, except: [:edit, :update] do
     resources :foods, only: [:new, :create], controller: 'inventory_foods'
+    resources :inventory_foods, only: [:new, :create, :destroy]
   end
   resources :recipes, only: [:index, :show, :destroy, :update, :new, :create] do
     member do

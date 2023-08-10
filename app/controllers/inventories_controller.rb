@@ -1,9 +1,10 @@
 class InventoriesController < ApplicationController
+  before_action :authenticate_user!
   before_action :set_inventory, only: %i[show edit update destroy]
 
   # GET /inventories
   def index
-    @inventories = Inventory.includes(:user).all
+    @inventories = current_user.inventories.includes(:user)
   end
 
   # GET /inventories/1
@@ -21,7 +22,7 @@ class InventoriesController < ApplicationController
     @inventory = current_user.inventories.build(inventory_params)
 
     if @inventory.save
-      redirect_to @inventory, notice: 'Inventory was successfully created.'
+      redirect_to inventories_url, notice: 'Inventory was successfully created.'
     else
       render :new, status: :unprocessable_entity
     end
@@ -42,11 +43,11 @@ class InventoriesController < ApplicationController
   private
 
   def set_inventory
-    @inventory = Inventory.includes(:user).find(params[:id])
+    @inventory = current_user.inventories.find(params[:id])
   end
 
   # Only allow a list of trusted parameters through.
   def inventory_params
-    params.require(:inventory).permit(:name)
+    params.require(:inventory).permit(:name, :description)
   end
 end

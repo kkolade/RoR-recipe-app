@@ -18,6 +18,11 @@
         <%= form.text_field :name, class: "form-control" %>
       </div>
 
+      <div>
+        <%= form.label :description, class: "form-label" %>
+        <%= form.text_area :description, class: "form-control" %>
+      </div>
+
       <div class="actions d-flex justify-content-end mt-4">
         <%= form.submit "Create Inventory", class: "btn btn-primary" %>
       </div>

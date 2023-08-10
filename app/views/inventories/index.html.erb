@@ -1,22 +1,3 @@
-<p style="color: green"><%= notice %></p>
-
-<%
-=begin%>
- <div id="inventories">
-  <% @inventories.each do |inventory| %>
-  <div class="inventory container card mb-4">
-    <%= link_to inventory do %>
-      <%= render partial: 'shared/inventory', locals: { inventory: inventory } %>
-      <%= link_to "REMOVE", inventory_path(inventory), method: :delete, data: { 
-        confirm: 'Are you sure?' 
-        } %>  
-    <% end %>
-  </div>
-  <% end %> 
-</div> 
-<%
-=end%>
-
 <% @inventories.each do |inventory| %>
   <div class="inventory-card card p-3" <%= 'owned' if inventory.user == current_user %>">
     <%= link_to inventory, class: "inventory-link" do %>

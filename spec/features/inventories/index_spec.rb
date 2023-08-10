@@ -1,31 +1,41 @@
 require 'rails_helper'
 
-RSpec.feature "Inventories index page", type: :feature do
-  let(:user) { create(:user) }
-  let(:other_user) { create(:user) }
+RSpec.describe 'Inventories index page', type: :feature do
+  include Devise::Test::IntegrationHelpers
 
-  before do
-    sign_in(user)
-  end
+  it "displays user's inventories and hides others' inventories" do
+    user = create(:user) # Create a user
+    sign_in(user) # Sign in the user
 
-  scenario "displays user's inventories and hides others' inventories" do
-    user_inventory = create(:inventory, user: user)
-    other_user_inventory = create(:inventory, user: other_user)
+    create(:inventory, name: "User's Inventory", user:)
+    other_user = create(:user)
+    create(:inventory, name: "Other User's Inventory", user: other_user)
 
     visit inventories_path
 
-    expect(page).to have_content(user_inventory.name)
-    expect(page).not_to have_content(other_user_inventory.name)
+    expect(page).to have_content("User's Inventory")
+    expect(page).not_to have_content("Other User's Inventory")
+  end
 
-    within(".inventory-card", text: user_inventory.name) do
-      expect(page).to have_link("Remove")
-      expect(page).not_to have_button("Remove", disabled: true)
+  it "renders Remove button for user's inventory" do
+    user = create(:user)
+    sign_in(user)
+    create(:inventory, name: "User's Inventory", user:)
+
+    visit inventories_path
+
+    within '.inventory-card', text: "User's Inventory" do
+      expect(page).to have_button('Remove')
+      expect(page).not_to have_button('Remove', disabled: true)
     end
+  end
 
-    within(".inventory-card", text: other_user_inventory.name) do
-      expect(page).to have_button("Remove", disabled: true)
-    end
+  it "renders 'New inventory' link" do
+    user = create(:user)
+    sign_in(user)
 
-    expect(page).to have_link("New inventory", href: new_inventory_path)
+    visit inventories_path
+
+    expect(page).to have_link('New inventory', href: new_inventory_path)
   end
 end

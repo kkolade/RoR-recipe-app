@@ -65,9 +65,10 @@ group :development, :test do
   gem 'rspec-rails'
 
   gem 'capybara'
+  gem 'database_cleaner'
+  gem 'factory_bot_rails'
   gem 'selenium-webdriver'
   gem 'webdrivers'
-  gem 'DatabaseCleaner'
 end
 
 group :development do

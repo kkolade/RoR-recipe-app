@@ -5,8 +5,14 @@ RSpec.describe 'Recipes', type: :feature do
 
   before do
     @user = User.create(id: 1, name: 'Jose', email: 'test@example.com', password: '123456')
-    @recipe = Recipe.create(user_id: @user.id, name: 'Apple pie', description: 'pie made with apples', is_public: true,
-                            preparation_time: 10, cooking_time: 20)
+    @recipe = Recipe.create(user: @user, name: 'Apple pie', description: 'pie made with apples', is_public: true)
+    @food_one = Food.create(name: 'Apples', measurement_unit: 'grams', price: 5)
+    @food_two = Food.create(name: 'Bread', measurement_unit: 'grams', price: 10)
+    @recipe_foods = [
+      RecipeFood.create(recipe: @recipe, food: @food_one, quantity: 2),
+      RecipeFood.create(recipe: @recipe, food: @food_two, quantity: 3)
+    ]
+
     sign_in @user # Creates session
   end
 
@@ -18,9 +24,14 @@ RSpec.describe 'Recipes', type: :feature do
       expect(page).to have_content("By: #{@recipe.user.name}")
     end
 
-    it 'has the text of the totals' do # and in the future the totals will be calculated
-      expect(page).to have_content('Total food items:')
-      expect(page).to have_content('Total price:')
+    it 'has the correct total price of the recipe' do
+      total_price = (@food_one.price * @recipe_foods[0].quantity) + (@food_two.price * @recipe_foods[1].quantity)
+      expect(page).to have_content("Total price: $#{total_price}")
+    end
+
+    it 'has the correct total food items of the recipe' do
+      total_foods = @recipe_foods.select { |recipe_food| recipe_food.recipe == @recipe }
+      expect(page).to have_content("Total food items: #{total_foods.length}")
     end
   end
 end

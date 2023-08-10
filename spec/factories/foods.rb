@@ -1,7 +1,7 @@
 FactoryBot.define do
   factory :food do
-    # Define attributes for the food factory
-    # For example:
-    name { 'Sample Food' }
+    name { 'Food Name' }
+    measurement_unit { 'grams' }
+    price { 10.0 }
   end
 end

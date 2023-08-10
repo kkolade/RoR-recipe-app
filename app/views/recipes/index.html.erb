@@ -3,17 +3,17 @@
     <div class="recipeHeader">
       <h1> My Recipes </h1>
       <div class="addRecipeBtn">
-      <%= link_to "New Recipe", new_recipe_path, class: "btn btn-primary" %>
+        <%= link_to "New Recipe", new_recipe_path, class: "btn btn-primary" %>
       </div>
     </div>
     <hr>
     <ul>
-      <% @recipes.includes(:user).each do |recipe| %>
+      <% @recipes.each do |recipe| %>
         <li class="recipeCont">
           <div class="recipeLeft">
             <%= link_to recipe.name, recipe_path(recipe), class: 'recipeTitle' %>
             <% if recipe.user == current_user %>
-            <%= link_to 'remove', recipe_path(recipe), data: { turbo_method: :delete, confirm: 'Are you sure you want to remove this recipe?' }, class: 'removeBtn' %>
+              <%= link_to 'remove', recipe_path(recipe), data: { turbo_method: :delete, confirm: 'Are you sure you want to remove this recipe?' }, class: 'removeBtn' %>
             <% end %>
           </div>
           <div class="recipeRight">

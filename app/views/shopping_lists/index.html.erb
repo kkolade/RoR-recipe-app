@@ -3,7 +3,7 @@
 <div class="shopping-list-details">
   <div>
     <p>Amount of food to buy: <%= @different_foods_count %></p>
-    <p>total value of food needed: $<%= @total_price %></p>
+    <p>Total value of food needed: $<%= @total_price %></p>
   </div>
   <div>
     <p>Recipe: <%= link_to "#{@recipe.name}", recipe_path(@recipe), class: "link" %></p>
@@ -24,7 +24,7 @@
       <tr>
         <td><%= food[:name] %></td>
         <td><%= food[:quantity] %> <%= food[:measurement_unit] %></td>
-        <td><%= food[:price_difference] %></td>
+        <td>$<%= food[:price_difference] %></td>
       </tr>
     <% end %>
   </tbody>

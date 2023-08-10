@@ -17,23 +17,25 @@ class ShoppingListsController < ApplicationController
 
     recipe_foods.each do |recipe_food|
       inventory_food = inventory_foods.find_by(food: recipe_food.food)
-      price_difference = (recipe_food.food.price * recipe_food.quantity) - (inventory_food.food.price * inventory_food.quantity)
 
-      if price_difference > 0
-        food_info << {
-          name: recipe_food.food.name,
-          quantity: recipe_food.quantity - inventory_food.quantity,
-          measurement_unit: recipe_food.food.measurement_unit,
-          price_difference: price_difference
-        }
-      end
+      recipe_food_price_difference = recipe_food.food.price * recipe_food.quantity
+      inventory_food_price_difference = inventory_food.food.price * inventory_food.quantity
+      price_difference = recipe_food_price_difference - inventory_food_price_difference
+
+      next unless price_difference.positive?
+
+      food_info << {
+        name: recipe_food.food.name,
+        quantity: recipe_food.quantity - inventory_food.quantity,
+        measurement_unit: recipe_food.food.measurement_unit,
+        price_difference:
+      }
     end
 
     food_info
   end
 
   def record_not_found
-    flash[:error] = "Invalid recipe or inventory ID."
-    redirect_to root_path
+    redirect_to root_path, alert: 'Invalid recipe or inventory ID.'
   end
 end

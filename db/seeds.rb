@@ -21,8 +21,23 @@ recipe_three = Recipe.new(user: testing_user, name: 'Apple pie', description: 'A
 recipe_three.save!
 
 food_apple          = Food.new(name: 'Apple', measurement_unit: 'grams', price: 5)
+food_bread          = Food.new(name: 'Bread', measurement_unit: 'grams', price: 10)
 food_pineapple      = Food.new(name: 'Pineapple', measurement_unit: 'grams', price: 10)
 food_chicken_breast = Food.new(name: 'Chicken breast', measurement_unit: 'units', price: 20)
 food_apple.save!
+food_bread.save!
 food_pineapple.save!
 food_chicken_breast.save!
+
+inventory_one = Inventory.new(user: user_example, name: 'Fridge')
+inventory_one.save!
+
+recipe_foods_one = RecipeFood.new(recipe: recipe_one, food: food_apple, quantity: 5)
+recipe_foods_two = RecipeFood.new(recipe: recipe_one, food: food_bread, quantity: 10)
+recipe_foods_one.save!
+recipe_foods_two.save!
+
+inventory_foods_one = InventoryFood.new(inventory: inventory_one, food: food_apple, quantity: 6)
+inventory_foods_two = InventoryFood.new(inventory: inventory_one, food: food_bread, quantity: 6)
+inventory_foods_one.save!
+inventory_foods_two.save!

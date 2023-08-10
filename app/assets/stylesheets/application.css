@@ -42,6 +42,10 @@ h1 {
 
 .public-recipe-box {
   border: 1px solid black;
+}
+
+.public-recipe-box,
+.shopping-list-details {
   display: grid;
   padding: 1rem;
   grid-template-columns: 1fr 1fr;
@@ -247,4 +251,9 @@ a {
   border: 1.5px solid green;
   border-radius: 6px;
   color: green;
+}
+
+.link {
+  color: blue;
+  text-decoration: underline;
 }

@@ -17,7 +17,14 @@
         <td><%= inventory_food.food.name %></td>
         <td><%= inventory_food.quantity %></td>
         <td>
-          <%= link_to "Delete", inventory_food, data: { turbo_method: :delete, confirm: "Are you sure?" } %>
+          <%
+=begin%>
+ <%= link_to "Delete", inventory_food, data: { turbo_method: :delete, confirm: "Are you sure?" } %> 
+<%
+=end%>
+          
+          <%= link_to "Delete", inventory_inventory_food_path(@inventory, inventory_food), method: :delete, data: { turbo_method: :delete, confirm: "Are you sure?" } %>
+
         </td>
       </tr>
     <% end %>

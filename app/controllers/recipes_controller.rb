@@ -30,6 +30,7 @@ class RecipesController < ApplicationController
 
   def modal
     @recipe = Recipe.find(params[:id])
+    render layout: false
   end
 
   def create

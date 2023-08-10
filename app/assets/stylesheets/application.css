@@ -42,6 +42,10 @@ h1 {
 
 .public-recipe-box {
   border: 1px solid black;
+}
+
+.public-recipe-box,
+.shopping-list-details {
   display: grid;
   padding: 1rem;
   grid-template-columns: 1fr 1fr;
@@ -147,10 +151,10 @@ a {
   left: 50%;
   top: 50%;
   transform: translate(-50%, -50%);
-  width: 50vw;
+  width: 60vw;
   word-break: break-word;
-  border-radius: 6px;
-  background: lightgray;
+  border-radius: 20px;
+  background: #f0f0f0;
 }
 
 .recipeInfoL {
@@ -194,6 +198,7 @@ a {
   flex-direction: row;
   justify-content: space-between;
   padding: 0 25%;
+  padding-bottom: 45px;
 }
 
 .buttonsRecipe a {
@@ -209,6 +214,22 @@ a {
   border: 1.5px solid #fff;
   border-radius: 6px;
   color: #fff;
+}
+
+.tableRecipe {
+  margin-left: 3%;
+}
+
+.tableRecipe tr,
+.tableRecipe td {
+  text-align: center;
+}
+
+.buttonsTable {
+  display: flex;
+  gap: 5px;
+  justify-content: center;
+  padding-top: 15px;
 }
 
 .formAddR {
@@ -247,4 +268,9 @@ a {
   border: 1.5px solid green;
   border-radius: 6px;
   color: green;
+}
+
+.link {
+  color: blue;
+  text-decoration: underline;
 }

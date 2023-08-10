@@ -33,7 +33,7 @@ The Recipe app keeps track of all your recipes, ingredients, and inventory. It w
 
 For simpler understanding the **RoR-recipe-app** follows the following Entity Relationship Diagram.
 
-![Entity Relationship Diagram](erdiagram.png)
+![Entity Relationship Diagram](/app/assets/images/erdiagram.png)
 
 ## 🛠 Built With <a name="built-with"></a>
 

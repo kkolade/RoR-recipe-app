@@ -1,14 +1,14 @@
 <h1>Public Recipes</h1>
 
-<% @recipes.each do |recipe| %>
+<% @recipe_totals.each do |recipe_total| %>
   <div class="public-recipe-box">
     <div>
-      <%= link_to recipe.name , recipe_path(recipe), class: 'recipe-title' %>
-      <p>By: <%= recipe.user.name %></p>
+      <%= link_to recipe_total[:recipe].name, recipe_path(recipe_total[:recipe]), class: 'recipe-title' %>
+      <p>By: <%= recipe_total[:recipe].user.name %></p>
     </div>
     <div>
-      <p>Total food items: 5</p>
-      <p>Total price: $250</p>
+      <p>Total food items: <%= recipe_total[:total_foods] %></p>
+      <p>Total price: $<%= recipe_total[:total_price] %></p>
     </div>
   </div>
 <% end %>

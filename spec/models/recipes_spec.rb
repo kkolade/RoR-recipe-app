@@ -1,9 +1,9 @@
 require 'rails_helper'
 
-RSpec.describe 'Post', type: :model do
+RSpec.describe 'Recipes', type: :model do
   before do
     @user = User.create(id: 1, name: 'Jose', email: 'test@example.com', password: '123456')
-    @recipe = Recipe.create(user_id: @user.id, name: 'Apple pie', description: 'pie made with apples', is_public: true,
+    @recipe = Recipe.create(user: @user, name: 'Apple pie', description: 'pie made with apples', is_public: true,
                             preparation_time: 10, cooking_time: 20)
   end
 

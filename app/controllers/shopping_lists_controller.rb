@@ -14,26 +14,24 @@ class ShoppingListsController < ApplicationController
 
   def calculate_food_info(recipe_foods, inventory_foods)
     food_info = []
-
     recipe_foods.each do |recipe_food|
       inventory_food = inventory_foods.find_by(food: recipe_food.food)
-
-      next if recipe_food.food.nil? || inventory_food.nil?
-
       recipe_food_price_difference = recipe_food.food.price * recipe_food.quantity
-      inventory_food_price_difference = inventory_food.food.price * inventory_food.quantity
+      if inventory_food.nil?
+        inventory_food_price_difference = 0
+        quantity = recipe_food.quantity
+      else
+        inventory_food_price_difference = inventory_food.food.price * inventory_food.quantity
+        quantity = recipe_food.quantity - inventory_food.quantity
+      end
       price_difference = recipe_food_price_difference - inventory_food_price_difference
-
       next unless price_difference.positive?
 
       food_info << {
-        name: recipe_food.food.name,
-        quantity: recipe_food.quantity - inventory_food.quantity,
-        measurement_unit: recipe_food.food.measurement_unit,
-        price_difference:
+        name: recipe_food.food.name, quantity:,
+        measurement_unit: recipe_food.food.measurement_unit, price_difference:
       }
     end
-
     food_info
   end
 

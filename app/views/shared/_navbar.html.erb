@@ -13,6 +13,9 @@
         <li class="nav-item">
           <%= link_to "My recipes", recipes_path, class: "nav-link" %>
         </li>
+        <li class="nav-item">
+          <%= link_to "My inventories", inventories_path, class: "nav-link" %>
+        </li>
       </ul>
       <span class="nav-item">
         <%= link_to "Sign Out", destroy_user_session_path, class: "nav-link", data: {turbo_method: :delete} %>

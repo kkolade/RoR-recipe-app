@@ -4,12 +4,12 @@ class InventoriesController < ApplicationController
 
   # GET /inventories
   def index
-    @inventories = current_user.inventories.includes(:user)
+    @inventories = current_user.inventories
   end
 
   # GET /inventories/1
   def show
-    set_inventory
+    @inventory = current_user.inventories.find(params[:id])
   end
 
   # GET /inventories/new

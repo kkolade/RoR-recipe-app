@@ -2,8 +2,8 @@ class ShoppingListsController < ApplicationController
   rescue_from ActiveRecord::RecordNotFound, with: :record_not_found
 
   def index
-    @recipe = Recipe.includes(:recipe_foods).find(params[:recipe_id])
-    @inventory = Inventory.includes(:inventory_foods).find(params[:inventory_id])
+    @recipe = Recipe.find(params[:recipe_id])
+    @inventory = Inventory.find(params[:inventory_id])
 
     @food_info = calculate_food_info(@recipe.recipe_foods.includes(:food), @inventory.inventory_foods.includes(:food))
     @total_price = @food_info.sum { |info| info[:price_difference] }

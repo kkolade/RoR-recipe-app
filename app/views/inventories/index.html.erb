@@ -1,5 +1,5 @@
 <% @inventories.each do |inventory| %>
-  <div class="inventory-card card p-3" <%= 'owned' if inventory.user == current_user %>">
+  <div class="inventory-card card p-3" <%= 'owned' if inventory.user == current_user %> >
     <%= link_to inventory, class: "inventory-link" do %>
       <%= render partial: 'shared/inventory', locals: { inventory: inventory } %>
     <% end %>

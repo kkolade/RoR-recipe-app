@@ -26,9 +26,9 @@ RSpec.describe 'recipes/show', type: :view do
     end
 
     if @recipe.user == @user
-      expect(rendered).to have_link('Add New Food')
+      expect(rendered).to have_link('Add ingredient')
     else
-      expect(rendered).not_to have_link('Add New Food')
+      expect(rendered).not_to have_link('Add ingredient')
     end
 
     if @recipe.is_public || @recipe.user == @user

@@ -22,7 +22,7 @@
   <div class="buttonsRecipe">
     <% if current_user == @recipe.user %>
       <div class="add-food-form">
-        <%= link_to "Add New Food", new_recipe_food_path(@recipe), class: "btn btn-primary" %>
+        <%= link_to "Add ingredient", new_recipe_food_path(@recipe), class: "btn btn-primary" %>
       </div>
     <% end %>
     <% if @recipe.is_public || current_user == @recipe.user %>
@@ -42,7 +42,7 @@
       </tr>
     </thead>
     <tbody>
-      <% @recipe_foods.includes(:food).each do |recipe_food| %>
+      <% @recipe_foods.each do |recipe_food| %>
         <tr>
           <td><%= recipe_food.food.name %></td>
           <td><%= "#{recipe_food.quantity} #{recipe_food.food.measurement_unit}" %></td>

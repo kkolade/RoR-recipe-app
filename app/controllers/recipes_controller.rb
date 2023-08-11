@@ -11,7 +11,7 @@ class RecipesController < ApplicationController
   end
 
   def show
-    @recipe_foods = @recipe.recipe_foods
+    @recipe_foods = @recipe.recipe_foods.includes(:food)
   end
 
   def toggle_public

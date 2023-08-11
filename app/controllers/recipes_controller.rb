@@ -20,6 +20,7 @@ class RecipesController < ApplicationController
   end
 
   def destroy
+    @recipe.recipe_foods.destroy_all # Delete associated recipe foods
     @recipe.destroy
     redirect_to recipes_path, notice: 'Recipe was successfully deleted.'
   rescue ActiveRecord::RecordNotFound
@@ -55,6 +56,17 @@ class RecipesController < ApplicationController
 
   def recipe_params
     params.require(:recipe).permit(:name, :description, :is_public, :preparation_time, :cooking_time)
+  end
+
+  def destroy_related_records
+    recipe_foods = @recipe.recipe_foods
+
+    recipe_foods.each do |recipe_food|
+      shopping_list = ShoppingList.find_by(recipe_food:)
+      shopping_list&.destroy
+    end
+
+    recipe_foods.destroy_all
   end
 
   def calculate_recipe_totals(recipes)

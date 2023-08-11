@@ -20,7 +20,7 @@ class RecipesController < ApplicationController
   end
 
   def destroy
-    @recipe.recipe_foods.destroy_all # Delete associated recipe foods
+    @recipe.recipe_foods.destroy_all
     @recipe.destroy
     redirect_to recipes_path, notice: 'Recipe was successfully deleted.'
   rescue ActiveRecord::RecordNotFound
